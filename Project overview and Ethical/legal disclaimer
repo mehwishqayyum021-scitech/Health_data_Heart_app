@@ -1,0 +1,22 @@
+Project Overview
+
+This application is a Clinical Decision Support System (CDSS) prototype designed to predict the risk of coronary artery disease. It utilizes Multiple Imputation by Chained Equations (MICE) to handle missing clinical values and a Random Forest Classifier for risk assessment.
+Data Credit & Acknowledgments
+
+The dataset used in this project is the UCI Heart Disease Dataset, accessed via Kaggle.
+
+    Dataset Contributor: Special thanks to Redwan Karim Sony for curating and providing the version of the data used in this research.
+
+    Original Sources: Cleveland, Hungary, Switzerland, and Long Beach V.
+
+Professional & Legal Disclaimer
+
+Important: For Educational and Research Purposes Only.
+
+    Not for Clinical Use: This application is a "beginner practice" project. It is not intended for use in real-world clinical diagnosis or treatment.
+
+    Historical Data: The underlying dataset is based on historical clinical records. Medical standards and diagnostic criteria may have evolved since this data was collected.
+
+    No Regulatory Licensing: This tool has not been licensed or evaluated by any health regulatory body. It is not HIPAA compliant and does not meet the security or privacy standards required for handling Protected Health Information (PHI).
+
+    No Liability: The developer assumes no responsibility for any medical decisions made based on the output of this software. Always consult a licensed medical professional for health concerns.
