@@ -6,23 +6,40 @@ import os
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 
-# Page setup
+# 1. Page Setup & Sidebar Research Credits
 st.set_page_config(page_title="Heart Risk CDSS", layout="wide")
 
-# 1. Load the Model, MICE Imputer, and Columns
-# Added a check to ensure files exist before loading
-try:
+with st.sidebar:
+    st.title("Clinical Metadata")
+    st.info("""
+    **Methodology:** Uses **MICE** (IterativeImputer) to handle missing values. 
+    **Researcher:** Mehwish Qayyum, Pharmacist.
+    **Data:** UCI Heart Disease Dataset (via Redwan Karim Sony).
+    """)
+    st.warning("**Disclaimer:** For educational/research use only. Not for clinical diagnosis.")
+
+# 2. Load the Model & Create Imputer Live
+@st.cache_resource
+def load_assets():
+    # Load model and column list
     model = joblib.load('heart_model1.joblib')
-    mice_imputer = joblib.load('mice_imputer.joblib')
     model_columns = joblib.load('model_columns1.joblib')
+    # Create the imputer LIVE to avoid version errors
+    train_df = pd.read_csv('train_data.csv')
+    imputer = IterativeImputer(random_state=42, max_iter=10)
+    imputer.fit(train_df)
+    return model, imputer, model_columns
+
+try:
+    model, mice_imputer, model_columns = load_assets()
 except Exception as e:
-    st.error(f"Error loading model files: {e}")
+    st.error(f"Configuration Error: {e}. Please ensure 'train_data.csv' is uploaded to GitHub.")
     st.stop()
 
 st.title("Heart Disease Risk Predictor")
 st.write("Professional Clinical Decision Support Tool (MICE Imputed)")
 
-# 2. Input Fields
+# 3. Input Fields
 col1, col2 = st.columns(2)
 
 with col1:
@@ -39,7 +56,7 @@ with col2:
     exang = st.selectbox("Exercise Induced Angina", [True, False])
     oldpeak = st.number_input("ST Depression (Oldpeak)", 0.0, 10.0, 0.0)
 
-# 3. Prediction Logic
+# 4. Prediction Logic
 if st.button("Analyze Risk"):
     # Create initial dataframe from inputs
     input_df = pd.DataFrame([{
@@ -51,13 +68,11 @@ if st.button("Analyze Risk"):
     # Apply One-Hot Encoding
     input_encoded = pd.get_dummies(input_df)
 
-    # REINDEX: FIXED the variable name here to match the loaded 'model_columns'
-    final_input = input_encoded.reindex(columns=model_columns, fill_value=np.nan)
-
-    # Ensure float datatype
+    # Reindex to match training columns
+    final_input = input_encoded.reindex(columns=model_columns, fill_value=0)
     final_input = final_input.astype(float)
 
-    # Apply MICE imputation
+    # Apply MICE imputation (Live)
     final_input_imputed = mice_imputer.transform(final_input)
 
     # Predict
