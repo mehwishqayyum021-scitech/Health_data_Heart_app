@@ -7,8 +7,21 @@ import os
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 
-# 1. Page Setup & Sidebar Research Credits
+# Page Setup & Sidebar Research Credits
 st.set_page_config(page_title="Heart Risk CDSS", layout="wide")
+# Styling (The "Painter's Instructions")
+st.markdown("""
+    <style>
+    .stApp {
+        background: linear-gradient(135deg, #ffffff 0%, #e1e8f0 100%);
+    }
+    .stButton>button {
+        background-color: #003366; 
+        color: #e1e8f0; /* Using a hex code for light blue looks more professional */
+        font-weight: bold;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 with st.sidebar:
     st.title("Clinical Metadata")
