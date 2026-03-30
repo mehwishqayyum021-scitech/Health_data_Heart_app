@@ -1,3 +1,40 @@
+# --- PROFESSIONAL CLINICAL STYLING ---
+st.markdown("""
+    <style>
+    /* Main Background: Soft Research Grey */
+    .stApp {
+        background-color: #f0f2f6;
+    }
+    
+    /* Sidebar/Input Area Styling */
+    section[data-testid="stSidebar"] {
+        background-color: #ffffff;
+        border-right: 1px solid #d1d5db;
+    }
+
+    /* Professional Blue Button */
+    .stButton>button {
+        background-color: #004a99; /* Deep Clinical Blue */
+        color: white;
+        border-radius: 8px;
+        border: none;
+        padding: 10px 24px;
+        font-weight: bold;
+    }
+    
+    .stButton>button:hover {
+        background-color: #003366;
+        color: #ffffff;
+    }
+
+    /* Titles and Headers */
+    h1, h2, h3 {
+        color: #1a365d;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 import streamlit as st
 import pandas as pd
 import numpy as np
