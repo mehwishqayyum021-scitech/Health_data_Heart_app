@@ -27,7 +27,7 @@ with st.sidebar:
     st.title("Clinical Metadata")
     st.info("""
     **Methodology:** Uses **MICE** (IterativeImputer) to handle missing values. 
-    **Researcher:** Mehwish Qayyum, Pharmacist.
+    **Researcher:** Mehwish Qayyum, Pharmacist, Researcher, aspirant medinformatician.
     **Data:** UCI Heart Disease Dataset (via Redwan Karim Sony).
     """)
     st.warning("**Disclaimer:** For educational/research use only. Not for clinical diagnosis.")
